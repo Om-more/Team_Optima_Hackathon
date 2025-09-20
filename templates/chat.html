@@ -531,7 +531,6 @@
                 HunarHub <i class="fas fa-palette"></i>
             </div>
             <div class="header-icons">
-                <i class="fas fa-bell" data-bs-toggle="tooltip" title="Notifications"></i>
                 <i class="fas fa-user-circle" data-bs-toggle="tooltip" title="Profile"></i>
             </div>
         </div>
@@ -548,9 +547,9 @@
                     <i class="fas fa-calendar-alt"></i>
                     <span>Events</span>
                 </a>
-                <a href="charts.html" class="btn-action">
+                <a href="history.html" class="btn-action">
                     <i class="fas fa-chart-bar"></i>
-                    <span>Charts</span>
+                    <span>History</span>
                 </a>
                 <a href="settings.html" class="btn-action">
                     <i class="fas fa-cog"></i>
@@ -558,11 +557,9 @@
                 </a>
             </div>
             
-            <!-- Explore Section -->
             <div class="explore-section">
                 <h5>Explore</h5>
                 
-                <!-- Hover Dropdowns -->
                 <div class="explore-menu">
                     <div class="dropdown-item">
                         <div class="dropdown-header">
@@ -602,10 +599,10 @@
             </div>
             
             <!-- Chat Button -->
-            <a href="chat.html" class="chat-button" style="display: inline-block; text-align: center; text-decoration: none;">
-                <i class="fas fa-comments me-2"></i>
-                Start with chat
-            </a>
+            <a href="{{ url_for('ai_chat') }}">
+                <button class="btn btn-primary btn-lg btn-block">Start AI Assistant Chat</button>
+                </a>
+
         </div>
         
         <!-- Desktop Content (Full Screen Multi-column Layout) -->
@@ -615,28 +612,10 @@
                 <div class="left-panel">
                     <!-- Quick Stats -->
                     <div class="sidebar-card">
-                        <h6><i class="fas fa-chart-line me-2"></i>Quick Stats</h6>
-                        <div class="stats-grid">
-                            <div class="stat-item">
-                                <div class="stat-number">147</div>
-                                <div class="stat-label">Products</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-number">23</div>
-                                <div class="stat-label">Orders</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-number">₹45k</div>
-                                <div class="stat-label">Revenue</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-number">89%</div>
-                                <div class="stat-label">Rating</div>
-                            </div>
-                        </div>
+                        <h6><i class="fas fa-chart-line me-2"></i>History</h6>
+                        
                     </div>
                     
-                    <!-- Quick Actions -->
                     <div class="sidebar-card">
                         <h6><i class="fas fa-bolt me-2"></i>Quick Actions</h6>
                         <div class="desktop-action-grid">
@@ -654,11 +633,9 @@
                 
                 <!-- Center Panel -->
                 <div class="center-panel">
-                    <!-- Main Explore Section -->
                     <div class="explore-section">
                         <h5>Explore Marketplace</h5>
                         
-                        <!-- Hover Dropdowns -->
                         <div class="explore-menu">
                             <div class="dropdown-item">
                                 <div class="dropdown-header">
@@ -700,10 +677,10 @@
                     </div>
                     
                     <!-- Chat Button -->
-                    <a href="#" class="chat-button" style="display: inline-block; text-align: center; text-decoration: none;">
-                        <i class="fas fa-comments me-3"></i>
-                        Start AI Assistant Chat
-                    </a>
+                    <a href="{{ url_for('ai_chat') }}">
+                        <button class="btn btn-primary btn-lg btn-block">Start AI Assistant Chat</button>
+                        </a>
+
                 </div>
                 
                 <!-- Right Panel -->

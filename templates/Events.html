@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - HunarHub</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #E67E5B;
+            --secondary-color: #F4E4D1;
+            --text-color: #5A4A3A;
+            --light-bg: #FAF7F2;
+            --card-bg: white;
+            --accent-color: #2C9AA0;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #F0A085 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Full Screen Layout */
+        .main-container {
+            background: var(--light-bg);
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header */
+        .header {
+            background: var(--primary-color);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        @media (min-width: 768px) {
+            .header {
+                padding: 20px 40px;
+            }
+        }
+        
+        .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        @media (min-width: 768px) {
+            .logo {
+                font-size: 1.8rem;
+            }
+        }
+        
+        .logo i {
+            margin-left: 8px;
+            font-size: 1rem;
+        }
+        
+        @media (min-width: 768px) {
+            .logo i {
+                font-size: 1.4rem;
+            }
+        }
+        
+        .header-icons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .header-icons i {
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        
+        @media (min-width: 768px) {
+            .header-icons i {
+                font-size: 1.5rem;
+            }
+        }
+        
+        .header-icons i:hover {
+            opacity: 0.7;
+        }
+        
+        /* Navigation */
+        .nav-menu {
+            background: #E8E4DC;
+            padding: 0;
+            display: flex;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        
+        .nav-menu::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .nav-link {
+            color: var(--text-color);
+            font-weight: 500;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            display: block;
+            white-space: nowrap;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color);
+            background: rgba(230, 126, 91, 0.1);
+        }
+        
+        .nav-link.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+            background: rgba(230, 126, 91, 0.1);
+        }
+        
+        /* Content Area */
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+        
+        @media (min-width: 768px) {
+            .content {
+                padding: 30px 40px;
+                max-width: 1400px;
+                margin: 0 auto;
+                width: 100%;
+            }
+        }
+        
+        /* Page Header */
+        .page-header {
+            margin-bottom: 30px;
+        }
+        
+        .page-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 10px;
+        }
+        
+        @media (min-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+        }
+        
+        .page-subtitle {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+        
+        /* Filter Section */
+        .filter-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .filter-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+        
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .filter-btn {
+            padding: 8px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 20px;
+            background: white;
+            color: var(--text-color);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        /* Events Grid */
+        .events-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        @media (min-width: 768px) {
+            .events-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+        }
+        
+        @media (min-width: 1200px) {
+            .events-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 30px;
+            }
+        }
+        
+        /* Event Card */
+        .event-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            border: 1px solid #f0f0f0;
+        }
+        
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .event-header {
+            background: linear-gradient(135deg, var(--accent-color), #238a91);
+            color: white;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .event-number {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .event-type {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+        
+        .event-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .event-body {
+            padding: 25px;
+        }
+        
+        .event-details {
+            margin-bottom: 20px;
+        }
+        
+        .event-location {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .event-dates {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .date-item {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .date-label {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        
+        .date-value {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            font-weight: 600;
+        }
+        
+        .event-status {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .status-upcoming {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-closing-soon {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-expired {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        /* Action Buttons */
+        .event-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .btn-primary {
+            background: var(--accent-color);
+            border: none;
+            border-radius: 10px;
+            padding: 12px 20px;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-primary:hover {
+            background: #238a91;
+            transform: translateY(-2px);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--accent-color);
+            border-radius: 10px;
+            padding: 10px 20px;
+            color: var(--accent-color);
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+        
+        /* No Events Message */
+        .no-events {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+        
+        .no-events i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: #ccc;
+        }
+        
+        /* Loading Animation */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                HunarHub <i class="fas fa-palette"></i>
+            </div>
+            <div class="header-icons">
+                <i class="fas fa-user-circle" data-bs-toggle="tooltip" title="Profile"></i>
+            </div>
+        </div>
+        
+        <!-- Navigation Menu -->
+        <nav class="nav-menu">
+            <a href="chat.html" class="nav-link">Home</a>
+            <a href="Addprod.html" class="nav-link">Add product</a>
+            <a href="Settings.html" class="nav-link">Settings</a>
+            <a href="#" class="nav-link active">Events</a>
+        </nav>
+        
+        <!-- Content -->
+        <div class="content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1 class="page-title">
+                    <i class="fas fa-calendar-alt me-3"></i>
+                    Handicraft Events
+                </h1>
+                <p class="page-subtitle">Discover upcoming Gandhi Shilp Bazar events and craft exhibitions across India</p>
+            </div>
+            
+            <!-- Filter Section -->
+            <div class="filter-section">
+                <div class="filter-title">
+                    <i class="fas fa-filter me-2"></i>
+                    Filter Events
+                </div>
+                <div class="filter-options">
+                    <button class="filter-btn active" data-filter="all">All Events</button>
+                    <button class="filter-btn" data-filter="upcoming">Upcoming</button>
+                    <button class="filter-btn" data-filter="closing-soon">Closing Soon</button>
+                    <button class="filter-btn" data-filter="state">State Level</button>
+                    <button class="filter-btn" data-filter="district">District Level</button>
+                </div>
+            </div>
+            
+            <!-- Loading -->
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Loading events...</p>
+            </div>
+            
+            <!-- Events Grid -->
+            <div class="events-grid" id="eventsGrid">
+                <!-- Event cards will be populated by JavaScript -->
+            </div>
+            
+            <!-- No Events Message -->
+            <div class="no-events" id="noEvents" style="display: none;">
+                <i class="fas fa-calendar-times"></i>
+                <h3>No events found</h3>
+                <p>Try adjusting your filters or check back later for new events.</p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Sample events data (based on the table from the website)
+        const eventsData = [
+            {
+                id: 1,
+                type: "Gandhi Shilp Bazar National, States, District",
+                location: "GSB (State) at Kullu",
+                eventDate: "27/02/2024 to 08/03/2026",
+                closingDate: "10/11/2025 23:45",
+                level: "state",
+                status: "upcoming"
+            },
+            {
+                id: 2,
+                type: "Gandhi Shilp Bazar National, States, District", 
+                location: "GSB (State) at Udaipur",
+                eventDate: "15/02/2024 to 24/02/2026",
+                closingDate: "31/10/2025 23:45",
+                level: "state",
+                status: "closing-soon"
+            },
+            {
+                id: 3,
+                type: "Gandhi Shilp Bazar National, States, District",
+                location: "GSB (District) at Bareilly UH",
+                eventDate: "01/02/2024 to 07/02/2026",
+                closingDate: "31/10/2025 23:45",
+                level: "district",
+                status: "upcoming"
+            },
+            {
+                id: 4,
+                type: "Gandhi Shilp Bazar National, States, District",
+                location: "GSB (National) at New Delhi",
+                eventDate: "15/12/2024 to 28/12/2024",
+                closingDate: "01/12/2024 23:45",
+                level: "national",
+                status: "closing-soon"
+            },
+            {
+                id: 5,
+                type: "Gandhi Shilp Bazar National, States, District",
+                location: "GSB (State) at Jaipur",
+                eventDate: "10/01/2025 to 20/01/2025",
+                closingDate: "25/12/2024 23:45",
+                level: "state",
+                status: "upcoming"
+            },
+            {
+                id: 6,
+                type: "Gandhi Shilp Bazar National, States, District",
+                location: "GSB (District) at Varanasi",
+                eventDate: "05/03/2025 to 15/03/2025",
+                closingDate: "20/02/2025 23:45",
+                level: "district",
+                status: "upcoming"
+            }
+        ];
+        
+        class EventsManager {
+            constructor() {
+                this.events = eventsData;
+                this.filteredEvents = [...this.events];
+                this.currentFilter = 'all';
+                
+                this.initializeEventListeners();
+                this.loadEvents();
+            }
+            
+            initializeEventListeners() {
+                // Filter buttons
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        this.handleFilterChange(e.target.dataset.filter);
+                    });
+                });
+                
+                // Initialize tooltips
+                var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+                var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                    return new bootstrap.Tooltip(tooltipTriggerEl);
+                });
+            }
+            
+            handleFilterChange(filter) {
+                // Update active filter button
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelector(`[data-filter="${filter}"]`).classList.add('active');
+                
+                this.currentFilter = filter;
+                this.filterEvents();
+            }
+            
+            filterEvents() {
+                if (this.currentFilter === 'all') {
+                    this.filteredEvents = [...this.events];
+                } else {
+                    this.filteredEvents = this.events.filter(event => {
+                        if (this.currentFilter === 'upcoming' || this.currentFilter === 'closing-soon') {
+                            return event.status === this.currentFilter;
+                        } else {
+                            return event.level === this.currentFilter;
+                        }
+                    });
+                }
+                
+                this.renderEvents();
+            }
+            
+            async loadEvents() {
+                // Show loading
+                document.getElementById('loading').style.display = 'block';
+                document.getElementById('eventsGrid').style.display = 'none';
+                
+                // Simulate API call
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                // Hide loading and show events
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('eventsGrid').style.display = 'grid';
+                
+                this.renderEvents();
+            }
+            
+            renderEvents() {
+                const eventsGrid = document.getElementById('eventsGrid');
+                const noEvents = document.getElementById('noEvents');
+                
+                if (this.filteredEvents.length === 0) {
+                    eventsGrid.style.display = 'none';
+                    noEvents.style.display = 'block';
+                    return;
+                }
+                
+                eventsGrid.style.display = 'grid';
+                noEvents.style.display = 'none';
+                
+                eventsGrid.innerHTML = this.filteredEvents.map(event => this.createEventCard(event)).join('');
+            }
+            
+            createEventCard(event) {
+                const statusClass = `status-${event.status}`;
+                const statusText = event.status === 'upcoming' ? 'Upcoming Event' : 
+                                 event.status === 'closing-soon' ? 'Closing Soon' : 'Expired';
+                
+                const levelIcon = event.level === 'national' ? 'fa-flag' : 
+                                 event.level === 'state' ? 'fa-map-marker-alt' : 'fa-building';
+                
+                return `
+                    <div class="event-card" data-level="${event.level}" data-status="${event.status}">
+                        <div class="event-header">
+                            <div class="event-number">${event.id}</div>
+                            <div class="event-icon">
+                                <i class="fas ${levelIcon}"></i>
+                            </div>
+                            <div class="event-type">${event.type}</div>
+                        </div>
+                        
+                        <div class="event-body">
+                            <div class="event-details">
+                                <div class="event-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    ${event.location}
+                                </div>
+                                
+                                <div class="event-status ${statusClass}">
+                                    ${statusText}
+                                </div>
+                                
+                                <div class="event-dates">
+                                    <div class="date-item">
+                                        <div class="date-label">Event Period</div>
+                                        <div class="date-value">${event.eventDate}</div>
+                                    </div>
+                                    <div class="date-item">
+                                        <div class="date-label">Apply By</div>
+                                        <div class="date-value">${event.closingDate}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="event-actions">
+                                <a href="https://indian.handicrafts.gov.in/en/events" 
+                                   class="btn-primary" 
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    Apply for Event
+                                </a>
+                                <a href="https://indian.handicrafts.gov.in/en/events" 
+                                   class="btn-secondary" 
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    <i class="fas fa-info-circle"></i>
+                                    View Details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+        
+        // Initialize events manager when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new EventsManager();
+        });
+    </script>
+</body>
+</html>
