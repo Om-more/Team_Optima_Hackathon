@@ -346,7 +346,6 @@
 </head>
 <body>
     <div class="chat-container">
-        <!-- Header -->
         <div class="chat-header">
             <div class="chat-title">
                 <i class="fas fa-robot"></i>
@@ -357,7 +356,6 @@
             </a>
         </div>
         
-        <!-- Messages Container -->
         <div class="messages-container" id="messagesContainer">
             <div class="message bot">
                 <div class="message-avatar">
@@ -369,9 +367,7 @@
             </div>
         </div>
         
-        <!-- Input Container -->
         <div class="input-container">
-            <!-- Image Preview -->
             <div id="imagePreview" class="image-preview" style="display: none;">
                 <img id="previewImg" class="preview-image" alt="Preview">
                 <button class="remove-image" onclick="removeImage()">
@@ -411,7 +407,7 @@
             this.style.height = Math.min(this.scrollHeight, 120) + 'px';
         });
         
-        // Send message on Enter (Shift+Enter for new line)
+        // Send message on Enter
         messageInput.addEventListener('keydown', function(e) {
             if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
@@ -456,27 +452,21 @@
             
             if (!message && !currentImage) return;
             
-            // Disable send button
             sendBtn.disabled = true;
             
-            // Add user message to chat
             addMessage(message, 'user', currentImage);
             
-            // Clear input
             input.value = '';
             input.style.height = 'auto';
             
-            // Show loading message
             const loadingMessage = addLoadingMessage();
             
             try {
-                // Prepare data for API
                 const requestData = {
                     message: message || "Please analyze this image",
                     image: currentImage
                 };
                 
-                // Send to Flask API
                 const response = await fetch('/api/chat', {
                     method: 'POST',
                     headers: {
@@ -487,7 +477,6 @@
                 
                 const data = await response.json();
                 
-                // Remove loading message
                 loadingMessage.remove();
                 
                 if (data.success) {
@@ -533,11 +522,9 @@
             if (text) {
                 const textDiv = document.createElement('div');
                 
-                // Process bot responses for embedded images
                 if (sender === 'bot') {
                     let html = text;
                     
-                    // Check for markdown image format first
                     const imageUrlMarkdownRegex = /\[.*?\]\((https?:\/\/[^\s]+?\.(jpg|jpeg|png|gif))\)/i;
                     const markdownMatch = text.match(imageUrlMarkdownRegex);
                     

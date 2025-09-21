@@ -6,6 +6,7 @@
     <title>Add Product - HunarHub</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
     <style>
         :root {
             --primary-color: #E67E5B;
@@ -31,7 +32,21 @@
             display: flex;
             flex-direction: column;
         }
-        
+        .platform-link {
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .platform-link:hover {
+            background: #d16b47;
+            color: white;
+            text-decoration: none;
+        }
         /* Header */
         .header {
             background: var(--primary-color);
@@ -78,32 +93,6 @@
             }
         }
         
-        .header-icons {
-            display: flex;
-            gap: 15px;
-        }
-        
-        @media (min-width: 768px) {
-            .header-icons {
-                gap: 25px;
-            }
-        }
-        
-        .header-icons i {
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: opacity 0.2s;
-        }
-        
-        @media (min-width: 768px) {
-            .header-icons i {
-                font-size: 1.5rem;
-            }
-        }
-        
-        .header-icons i:hover {
-            opacity: 0.7;
-        }
         
         /* Navigation */
         .nav-menu {
@@ -574,27 +563,21 @@
 </head>
 <body>
     <div class="main-container">
-        <!-- Header -->
         <div class="header">
             <div class="logo">
                 HunarHub <i class="fas fa-palette"></i>
             </div>
-            <div class="header-icons">
-                <i class="fas fa-user-circle" data-bs-toggle="tooltip" title="Profile"></i>
-            </div>
+            
         </div>
         
-        <!-- Navigation Menu -->
         <nav class="nav-menu">
             <a href="chat.html" class="nav-link">Home</a>
             <a href="Addprod.html" class="nav-link active">Add product</a>
-            <a href="Settings.html" class="nav-link">Settings</a>
-            <a href="Events.html" class="nav-link">Events</a>
+            <a href="aboutapp.html" class="nav-link">About</a>
+            <a href="events.html" class="nav-link">Events</a>
         </nav>
         
-        <!-- Content Wrapper -->
         <div class="content-wrapper">
-            <!-- Left Sidebar (Desktop Only) -->
             <div class="sidebar-left">
                 <div class="sidebar-card">
                     <h6><i class="fas fa-lightbulb me-2"></i>Tips</h6>
@@ -613,15 +596,12 @@
                 </div>
             </div>
             
-            <!-- Main Content -->
             <div class="content">
-                <!-- Success Message -->
                 <div class="success-message" id="successMessage">
                     <i class="fas fa-check-circle me-2"></i>
                     Product added successfully!
                 </div>
                 
-                <!-- Loading Spinner -->
                 <div class="loading" id="loadingSpinner">
                     <div class="spinner-border" role="status">
                         <span class="visually-hidden">Loading...</span>
@@ -629,9 +609,7 @@
                     <p class="mt-2">Adding product...</p>
                 </div>
                 
-                <!-- Form -->
                 <form id="productForm">
-                    <!-- Image Upload -->
                     <div class="image-upload-area" id="imageUploadArea">
                         <input type="file" class="file-input" id="fileInput" accept="image/*">
                         <div class="upload-content" id="uploadContent">
@@ -643,14 +621,12 @@
                         <img class="preview-image" id="previewImage" alt="Product Preview">
                     </div>
                     
-                    <!-- Product Name -->
                     <div class="form-group">
                         <label class="form-label" for="productName">Name *</label>
                         <input type="text" class="form-control" id="productName" placeholder="Enter product name" maxlength="100" required>
                         <div class="char-counter" id="nameCounter">0/100</div>
                     </div>
                     
-                    <!-- Category -->
                     <div class="form-group">
                         <label class="form-label" for="category">Category</label>
                         <select class="form-control" id="category" required>
@@ -658,6 +634,7 @@
                             <option value="home-decor">Home Decor</option>
                             <option value="handicrafts">Handicrafts</option>
                             <option value="canvas-arts">Canvas Arts</option>
+                            <option value="digital-art">Digital Art</option>
                             <option value="pottery">Pottery</option>
                             <option value="woodworks">Woodworks</option>
                             <option value="miniatures">Miniatures</option>
@@ -666,59 +643,52 @@
                         </select>
                     </div>
                     
-                    <!-- Location -->
                     <div class="form-group">
                         <label class="form-label" for="location">Location</label>
                         <input type="text" class="form-control" id="location" placeholder="Enter your location">
                     </div>
                     
-                    <!-- Description -->
                     <div class="form-group">
                         <label class="form-label" for="description">Description *</label>
                         <textarea class="form-control" id="description" rows="4" placeholder="Describe your product, its story, and craftsmanship..." maxlength="500" required></textarea>
                         <div class="char-counter" id="descCounter">0/500</div>
                     </div>
                     
-                    <!-- Price -->
                     <div class="form-group">
                         <label class="form-label" for="price">Price *</label>
                         <input type="number" class="form-control" id="price" placeholder="Enter price in ₹" min="1" required>
                     </div>
                     
-                    <!-- Platform Selection -->
                     <div class="form-group">
                         <label class="platform-label">Add to platforms</label>
                         <div class="platform-options">
                             <div class="platform-item">
                                 <span class="platform-name">Meesho</span>
-                                <div class="platform-toggle" data-platform="meesho"></div>
+                                <a href="https://supplier.meesho.com/panel/v3/new/root/login?redirect=%2Fpanel" target="_blank" class="platform-link">Visit Meesho</a>
                             </div>
                             <div class="platform-item">
                                 <span class="platform-name">Karigar</span>
-                                <div class="platform-toggle" data-platform="karigar"></div>
+                                <a href="https://sell.amazon.in/grow-your-business/amazon-karigar" target="_blank" class="platform-link">Visit Karigar</a>
                             </div>
                             <div class="platform-item">
                                 <span class="platform-name">Etsy</span>
-                                <div class="platform-toggle active" data-platform="etsy"></div>
+                                <a href="https://www.etsy.com/in-en/signin" target="_blank" class="platform-link">Visit Etsy</a>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- Submit Button -->
                     <button type="submit" class="btn-primary">
                         <i class="fas fa-plus me-2"></i>
                         Add Product
                     </button>
                 </form>
                 
-                <!-- Chat Button -->
                 <a href="AI.html" class="btn-primary btn-success" style="display: inline-block; text-align: center; text-decoration: none;">
                     <i class="fas fa-comments me-2"></i>
                     Start with chat
                 </a>
             </div>
             
-            <!-- Right Sidebar (Desktop Only) -->
             <div class="sidebar-right">
                 <div class="sidebar-card">
                     <h6><i class="fas fa-store me-2"></i>Platform Info</h6>
@@ -740,112 +710,145 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Initialize tooltips
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl)
+        
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+});
+
+// Image Upload Functionality
+const imageUploadArea = document.getElementById('imageUploadArea');
+const fileInput = document.getElementById('fileInput');
+const uploadContent = document.getElementById('uploadContent');
+const previewImage = document.getElementById('previewImage');
+let uploadedImageName = '';
+
+imageUploadArea.addEventListener('click', () => {
+    fileInput.click();
+});
+
+fileInput.addEventListener('change', handleFileSelect);
+
+imageUploadArea.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    imageUploadArea.classList.add('dragover');
+});
+
+imageUploadArea.addEventListener('dragleave', () => {
+    imageUploadArea.classList.remove('dragover');
+});
+
+imageUploadArea.addEventListener('drop', (e) => {
+    e.preventDefault();
+    imageUploadArea.classList.remove('dragover');
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+        handleFile(files[0]);
+    }
+});
+
+function handleFileSelect(e) {
+    const file = e.target.files[0];
+    if (file) {
+        handleFile(file);
+    }
+}
+
+function handleFile(file) {
+    if (file && file.type.startsWith('image/')) {
+        uploadedImageName = file.name;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            previewImage.src = e.target.result;
+            uploadContent.style.display = 'none';
+            previewImage.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+const nameInput = document.getElementById('productName');
+const nameCounter = document.getElementById('nameCounter');
+const descInput = document.getElementById('description');
+const descCounter = document.getElementById('descCounter');
+
+nameInput.addEventListener('input', () => {
+    const count = nameInput.value.length;
+    nameCounter.textContent = `${count}/100`;
+    nameCounter.classList.toggle('warning', count > 90);
+});
+
+descInput.addEventListener('input', () => {
+    const count = descInput.value.length;
+    descCounter.textContent = `${count}/500`;
+    descCounter.classList.toggle('warning', count > 450);
+});
+
+// Form Submission with CSV Storage
+document.getElementById('productForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const name = document.getElementById('productName').value.trim();
+    const description = document.getElementById('description').value.trim();
+    const price = document.getElementById('price').value;
+    
+    if (!name || !description || !price) {
+        alert('Please fill in all required fields (Name, Description, Price)');
+        return;
+    }
+    
+    if (parseFloat(price) <= 0) {
+        alert('Please enter a valid price greater than 0');
+        return;
+    }
+    
+    // Show loading
+    document.getElementById('loadingSpinner').style.display = 'block';
+    
+    // Prepare product data
+    const productData = {
+        image: uploadedImageName || 'No image',
+        name: name,
+        category: document.getElementById('category').value,
+        location: document.getElementById('location').value.trim(),
+        description: description,
+        price: parseFloat(price)
+    };
+    
+    try {
+        const response = await fetch('/api/save-product', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(productData)
         });
         
-        // Image Upload Functionality
-        const imageUploadArea = document.getElementById('imageUploadArea');
-        const fileInput = document.getElementById('fileInput');
-        const uploadContent = document.getElementById('uploadContent');
-        const previewImage = document.getElementById('previewImage');
+        const result = await response.json();
         
-        // Click to upload
-        imageUploadArea.addEventListener('click', () => {
-            fileInput.click();
-        });
-        
-        // File selection
-        fileInput.addEventListener('change', handleFileSelect);
-        
-        // Drag and drop
-        imageUploadArea.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            imageUploadArea.classList.add('dragover');
-        });
-        
-        imageUploadArea.addEventListener('dragleave', () => {
-            imageUploadArea.classList.remove('dragover');
-        });
-        
-        imageUploadArea.addEventListener('drop', (e) => {
-            e.preventDefault();
-            imageUploadArea.classList.remove('dragover');
-            const files = e.dataTransfer.files;
-            if (files.length > 0) {
-                handleFile(files[0]);
-            }
-        });
-        
-        function handleFileSelect(e) {
-            const file = e.target.files[0];
-            if (file) {
-                handleFile(file);
-            }
-        }
-        
-        function handleFile(file) {
-            if (file && file.type.startsWith('image/')) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    previewImage.src = e.target.result;
-                    uploadContent.style.display = 'none';
-                    previewImage.style.display = 'block';
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-        
-        // Character Counters
-        const nameInput = document.getElementById('productName');
-        const nameCounter = document.getElementById('nameCounter');
-        const descInput = document.getElementById('description');
-        const descCounter = document.getElementById('descCounter');
-        
-        nameInput.addEventListener('input', () => {
-            const count = nameInput.value.length;
-            nameCounter.textContent = `${count}/100`;
-            nameCounter.classList.toggle('warning', count > 90);
-        });
-        
-        descInput.addEventListener('input', () => {
-            const count = descInput.value.length;
-            descCounter.textContent = `${count}/500`;
-            descCounter.classList.toggle('warning', count > 450);
-        });
-        
-        // Platform Toggles
-        document.querySelectorAll('.platform-toggle').forEach(toggle => {
-            toggle.addEventListener('click', () => {
-                toggle.classList.toggle('active');
-            });
-        });
-        
-        // Form Submission
-        document.getElementById('productForm').addEventListener('submit', (e) => {
-            e.preventDefault();
+        if (result.success) {
+            document.getElementById('successMessage').style.display = 'block';
             
-            // Show loading
-            document.getElementById('loadingSpinner').style.display = 'block';
+            document.getElementById('productForm').reset();
+            uploadContent.style.display = 'block';
+            previewImage.style.display = 'none';
+            nameCounter.textContent = '0/100';
+            descCounter.textContent = '0/500';
+            uploadedImageName = '';
             
-            // Simulate API call
             setTimeout(() => {
-                document.getElementById('loadingSpinner').style.display = 'none';
-                document.getElementById('successMessage').style.display = 'block';
-                
-                // Reset form after success
-                setTimeout(() => {
-                    document.getElementById('productForm').reset();
-                    uploadContent.style.display = 'block';
-                    previewImage.style.display = 'none';
-                    nameCounter.textContent = '0/100';
-                    descCounter.textContent = '0/500';
-                    document.getElementById('successMessage').style.display = 'none';
-                }, 3000);
-            }, 2000);
-        });
+                document.getElementById('successMessage').style.display = 'none';
+            }, 3000);
+        } else {
+            alert('Error saving product: ' + result.error);
+        }
+    } catch (error) {
+        console.error('Network error:', error);
+        alert('Network error: Could not save product. Please try again.');
+    } finally {
+        document.getElementById('loadingSpinner').style.display = 'none';
+    }
+});
     </script>
 </body>
 </html>

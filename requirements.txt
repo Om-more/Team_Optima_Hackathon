@@ -9,3 +9,5 @@ protobuf==4.25.3
 Pillow
 gradio
 google-generativeai
+gunicorn==21.2.0
+Pillow==10.1.0
