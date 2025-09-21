@@ -92,7 +92,6 @@ def aboutapp():
 def ai_interface():
     return render_template('AI.html')
 
-@app.route('/charts.html')
 @app.route('/history.html')
 def history():
     return render_template('history.html')
@@ -215,9 +214,10 @@ def query_with_image(user_question, image_path=None, image_bytes=None):
         return f"Error processing request: {str(e)}"
 
 if __name__ == '__main__':
+    # Create upload folder and initialize CSV before starting the app
+    os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+    initialize_csv()
+    
+    # Get port and run app (only once!)
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, debug=False)
-    os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-    # Initialize CSV file on startup
-    initialize_csv()
-    app.run(debug=True)
