@@ -215,6 +215,8 @@ def query_with_image(user_question, image_path=None, image_bytes=None):
         return f"Error processing request: {str(e)}"
 
 if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)
     os.makedirs(UPLOAD_FOLDER, exist_ok=True)
     # Initialize CSV file on startup
     initialize_csv()
